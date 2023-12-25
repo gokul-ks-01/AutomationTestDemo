@@ -7,6 +7,11 @@
         <classes>
             <class name="Tests.SimpleFormTest" />
         </classes>
+    </test>
+    <test name="VerifyCloseButtonProgressBar">
+        <classes>
+            <class name="Tests.VerifyCloseButtonProgressBar" />
+        </classes>
 
     </test>
 </suite>

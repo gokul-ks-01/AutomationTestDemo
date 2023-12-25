@@ -4,7 +4,6 @@ import Base.DriverInitializer;
 import PageObjects.InputFormPage;
 import PageObjects.MainPage;
 import PageObjects.SimpleFormPage;
-import util.ReportUtil;
 import util.ScreenshotUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -34,7 +33,7 @@ public class SimpleFormTest extends DriverInitializer{
     public void verifySimpleForm() throws IOException {
         mainPage = PageFactory.initElements(driver,MainPage.class);
         mainPage.selectForm();
-        ReportUtil.writeTestInfo("selected input form");
+       /* ReportUtil.writeTestInfo("selected input form");*/
         inputFormPage = PageFactory.initElements(driver,InputFormPage.class);
         inputFormPage.clickSimpleFormDemoSideMenu();
         simpleFormPage = PageFactory.initElements(driver,SimpleFormPage.class);

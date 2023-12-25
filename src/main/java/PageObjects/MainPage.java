@@ -25,6 +25,9 @@ public class MainPage {
     @FindBy(id = "others")
     WebElement others;
 
+    @FindBy(id ="progress-bars" )
+    WebElement progressBars;
+
 
     public void selectHome(){
         homeMenu.click();
@@ -46,5 +49,8 @@ public class MainPage {
     }
     public void selectOthers(){
         others.click();
+    }
+    public void selectProgressBars(){
+        progressBars.click();
     }
 }

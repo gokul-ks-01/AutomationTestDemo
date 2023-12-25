@@ -11,60 +11,47 @@ import org.testng.ITestResult;
 
 public class ReportUtil implements ITestListener {
 
-    private final ExtentReports extentReports;
-    private static ExtentTest extentTest;
-    String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
-    public ReportUtil() {
-        ExtentHtmlReporter extentHtmlReporter = new ExtentHtmlReporter(reportPath);
-        extentHtmlReporter.config().setDocumentTitle("Extent Report");
-        extentHtmlReporter.config().setReportName("Selenium Test Report");
-        extentHtmlReporter.config().setTheme(Theme.STANDARD);
+    private static final ExtentReports extentReports;
+    ExtentTest extentTest ;
+
+    static {
+        String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
+        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(reportPath);
+        htmlReporter.config().setDocumentTitle("Automation Report");
+        htmlReporter.config().setReportName("Test Automation Results");
+        htmlReporter.config().setTheme(Theme.STANDARD);
         extentReports = new ExtentReports();
-        extentReports.attachReporter(extentHtmlReporter);
+        extentReports.attachReporter(htmlReporter);
     }
 
     @Override
     public void onStart(ITestContext context) {
-        // Not required to do anything specific here, as initialization is done in the constructor
-    }
-
-    @Override
-    public void onTestStart(ITestResult result) {
-        extentTest = extentReports.createTest(result.getName());
-        extentTest.log(Status.INFO,"Test Start");
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        if (extentTest != null) {
-            extentTest.log(Status.PASS, "Test passed");
-        }
-    }
-
-    @Override
-    public void onTestFailure(ITestResult result) {
-        if (extentTest != null) {
-            extentTest.log(Status.FAIL, "Test Failed");
-        }
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        if (extentTest != null) {
-            extentTest.log(Status.SKIP, "Test Skipped");
-        }
+        System.out.println("Extent Report - Test Suite started: " + context.getName());
+         extentTest = extentReports.createTest(context.getName());
     }
 
     @Override
     public void onFinish(ITestContext context) {
+        System.out.println("Extent Report - Test Suite finished: " + context.getName());
         extentReports.flush();
     }
-
-    public ExtentReports getExtentReports() {
-        return extentReports;
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        extentTest.log(Status.PASS, "Test passed");
     }
 
-    public static void writeTestInfo(String info){
-        extentTest.log(Status.INFO,info);
+    @Override
+    public void onTestFailure(ITestResult result) {
+        extentTest.log(Status.FAIL, "Test Failed");
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        extentTest.log(Status.SKIP, "Test Skipped");
+    }
+
+
+    public static ExtentReports getExtentReports() {
+        return extentReports;
     }
 }
