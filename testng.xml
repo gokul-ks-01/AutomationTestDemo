@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyDemoSuite" >
+    <listeners>
+        <listener class-name="util.ReportUtil" />
+    </listeners>
+    <test name="SimpleFormTest">
+        <classes>
+            <class name="Tests.SimpleFormTest" />
+        </classes>
+
+    </test>
+</suite>
