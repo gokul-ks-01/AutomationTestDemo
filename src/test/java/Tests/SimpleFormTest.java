@@ -4,49 +4,38 @@ import Base.DriverInitializer;
 import PageObjects.InputFormPage;
 import PageObjects.MainPage;
 import PageObjects.SimpleFormPage;
-import util.ScreenshotUtil;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.*;
-
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+import util.ScreenshotUtil;
 import java.io.IOException;
 
 @Listeners(util.ReportUtil.class)
 public class SimpleFormTest extends DriverInitializer{
 
-    WebDriver driver;
+
     MainPage mainPage;
     SimpleFormPage simpleFormPage ;
-
+    WebDriver driver;
     InputFormPage inputFormPage;
     private static final String MESSAGE = "You did it fine" ;
 
-    @Parameters({"browser"})
-    @BeforeTest
-    public void setup (@Optional("chrome") String browser){
-        driver =  createWebDriverSession(browser);
-        driver.get(PAGE_URL);
-    }
-
-    @Test(testName = "verifySimpleForm")
+    @Test(testName = "verifySimpleForm",retryAnalyzer = util.RetryAnalyzer.class)
     public void verifySimpleForm() throws IOException {
-        mainPage = PageFactory.initElements(driver,MainPage.class);
+        driver = getDriver();
+        mainPage = new MainPage(driver);
         mainPage.selectForm();
+        /*ReportUtil reportUtil = ReportUtil.getInstance();
+        reportUtil.logToExtentReport(Status.INFO,"this is to test extra info");*/
        /* ReportUtil.writeTestInfo("selected input form");*/
-        inputFormPage = PageFactory.initElements(driver,InputFormPage.class);
+        inputFormPage = new InputFormPage(driver);
         inputFormPage.clickSimpleFormDemoSideMenu();
-        simpleFormPage = PageFactory.initElements(driver,SimpleFormPage.class);
+        simpleFormPage = new SimpleFormPage(driver);
         simpleFormPage.enterMessage(MESSAGE);
         simpleFormPage.clickButtonShowMessage();
         Assert.assertEquals(simpleFormPage.getMessageEntered(),"Your Message : "+MESSAGE);
         ScreenshotUtil.captureScreenshot(driver,"simpleFormTest1");
+
     }
-    @AfterTest
-    public void tearDown(){
-        driver.quit();
-    }
-
-
-
 }

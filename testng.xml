@@ -3,15 +3,16 @@
     <listeners>
         <listener class-name="util.ReportUtil" />
     </listeners>
-    <test name="SimpleFormTest">
+    <test name="JavaScriptAlerts" parallel="tests">
         <classes>
-            <class name="Tests.SimpleFormTest" />
+            <class name="Tests.JavaScriptAlertsTests">
+                <parameter name="browser" value="firefox"/>
+                <methods>
+                    <include name="verifyJavascriptAlertText"/>
+                    <include name="verifyJavascriptAlertConfirmButton"/>
+                    <include name="verifyJavascriptPromptBox"/>
+                </methods>
+            </class>
         </classes>
-    </test>
-    <test name="VerifyCloseButtonProgressBar">
-        <classes>
-            <class name="Tests.VerifyCloseButtonProgressBar" />
-        </classes>
-
     </test>
 </suite>

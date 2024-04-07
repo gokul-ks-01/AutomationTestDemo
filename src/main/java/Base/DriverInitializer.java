@@ -5,11 +5,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.*;
+import util.ScreenshotUtil;
 
 public class DriverInitializer {
 
-    public static final String PAGE_URL = "https://selenium.obsqurazone.com/index.php" ;
-
+    public static final String PAGE_URL = "https://selenium.qabible.in/index.php" ;
+    WebDriver driver ;
+    @Parameters({"browser"})
+    @BeforeTest
+    public void setup (@Optional("chrome") String browser){
+        driver = createWebDriverSession(browser);
+        driver.get(PAGE_URL);
+    }
+    public WebDriver getDriver(){
+        return  driver ;
+    }
+    @AfterTest
+    public void tearDown(){
+        driver.quit();
+    }
     public WebDriver createWebDriverSession(String browserName) {
         WebDriver driver;
         switch (browserName) {
@@ -31,4 +46,6 @@ public class DriverInitializer {
         }
         return driver;
     }
+
+
 }

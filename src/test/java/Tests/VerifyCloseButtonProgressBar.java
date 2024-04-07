@@ -16,15 +16,10 @@ public class VerifyCloseButtonProgressBar extends DriverInitializer {
     MainPage mainPage;
     ProgressBarPage progressBarPage;
     JqueryProgressPage jqueryProgressPage;
-    @Parameters({"browser"})
-    @BeforeTest
-    public void setup (@Optional("chrome") String browser){
-        driver =  createWebDriverSession(browser);
-        driver.get(PAGE_URL);
-    }
 
     @Test
     public void verifyCloseButton() throws IOException {
+        driver = getDriver();
         mainPage = PageFactory.initElements(driver, MainPage.class);
         mainPage.selectProgressBars();
         progressBarPage = PageFactory.initElements(driver, ProgressBarPage.class);
