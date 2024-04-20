@@ -12,7 +12,6 @@ import org.testng.ITestResult;
 public class ReportUtil implements ITestListener {
 
     private static final ExtentReports extentReports;
-    ExtentTest extentTest ;
 
     static {
         String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
@@ -27,7 +26,6 @@ public class ReportUtil implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         System.out.println("Extent Report - Test Suite started: " + context.getName());
-         extentTest = extentReports.createTest(context.getName());
     }
 
     @Override
@@ -35,21 +33,33 @@ public class ReportUtil implements ITestListener {
         System.out.println("Extent Report - Test Suite finished: " + context.getName());
         extentReports.flush();
     }
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        String testName = result.getMethod().getMethodName();
+        ExtentTest extentTest = extentReports.createTest(testName);
+        extentTest.log(Status.INFO, "Test Started");
+     //   extentTest.assignCategory(result.getMethod().getRealClass().getSimpleName());
+    }
+
     @Override
     public void onTestSuccess(ITestResult result) {
+        ExtentTest extentTest = extentReports.createTest(result.getMethod().getMethodName());
         extentTest.log(Status.PASS, "Test passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
+        ExtentTest extentTest = extentReports.createTest(result.getMethod().getMethodName());
         extentTest.log(Status.FAIL, "Test Failed");
+        extentTest.log(Status.FAIL, result.getThrowable());
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
+        ExtentTest extentTest = extentReports.createTest(result.getMethod().getMethodName());
         extentTest.log(Status.SKIP, "Test Skipped");
     }
-
 
     public static ExtentReports getExtentReports() {
         return extentReports;

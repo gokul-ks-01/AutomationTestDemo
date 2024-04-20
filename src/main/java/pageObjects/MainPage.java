@@ -1,4 +1,4 @@
-package PageObjects;
+package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +9,10 @@ public class MainPage {
     //this is page object for the top bar menu or the home page.
     WebDriver driver ;
     public MainPage(WebDriver driver){
-
         this.driver = driver ;
         PageFactory.initElements(driver,this);
     }
+
     @FindBy(xpath = "//a[text()='Home']")
     WebElement homeMenu;
     @FindBy(xpath = "//a[contains(text(),'Input Form')]")

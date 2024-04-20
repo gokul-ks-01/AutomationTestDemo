@@ -1,9 +1,9 @@
-package Tests;
+package tests;
 
-import Base.DriverInitializer;
-import PageObjects.InputFormPage;
-import PageObjects.MainPage;
-import PageObjects.SimpleFormPage;
+import base.DriverInitializer;
+import pageObjects.InputFormPage;
+import pageObjects.MainPage;
+import pageObjects.SimpleFormPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -13,7 +13,6 @@ import java.io.IOException;
 
 @Listeners(util.ReportUtil.class)
 public class SimpleFormTest extends DriverInitializer{
-
 
     MainPage mainPage;
     SimpleFormPage simpleFormPage ;

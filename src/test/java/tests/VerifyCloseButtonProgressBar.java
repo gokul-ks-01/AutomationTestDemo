@@ -1,9 +1,9 @@
-package Tests;
+package tests;
 
-import Base.DriverInitializer;
-import PageObjects.JqueryProgressPage;
-import PageObjects.MainPage;
-import PageObjects.ProgressBarPage;
+import base.DriverInitializer;
+import pageObjects.JqueryProgressPage;
+import pageObjects.MainPage;
+import pageObjects.ProgressBarPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;

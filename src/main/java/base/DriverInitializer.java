@@ -1,19 +1,21 @@
-package Base;
+package base;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.testng.annotations.*;
-import util.ScreenshotUtil;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 public class DriverInitializer {
 
     public static final String PAGE_URL = "https://selenium.qabible.in/index.php" ;
     WebDriver driver ;
     @Parameters({"browser"})
-    @BeforeTest
+    @BeforeClass
     public void setup (@Optional("chrome") String browser){
         driver = createWebDriverSession(browser);
         driver.get(PAGE_URL);
@@ -21,7 +23,7 @@ public class DriverInitializer {
     public WebDriver getDriver(){
         return  driver ;
     }
-    @AfterTest
+    @AfterClass
     public void tearDown(){
         driver.quit();
     }
@@ -46,6 +48,5 @@ public class DriverInitializer {
         }
         return driver;
     }
-
 
 }
