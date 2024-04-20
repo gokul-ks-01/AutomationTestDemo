@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="MyDemoSuite" >
+<suite name="MySuite" >
+    <listeners>
+        <listener class-name="util.ReportUtil"/>
+    </listeners>
 
-    <test name="DemoTest">
+    <test name="MyTest">
         <classes>
-            <class name="VerifyAnnotationsTest1"/>
-            <class name="VerifyAnnotationTest2">
-            </class>
+            <class name="tests.JavaScriptAlertsTests"/>
         </classes>
     </test>
 
